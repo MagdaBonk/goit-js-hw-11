@@ -21,8 +21,7 @@ inputSearch.addEventListener('keypress', function (event) {
 
 async function inputListener(event) {
   const searchQuery = event.target.value;
-  var URL = `https://pixabay.com/api/?key=${API_KEY}&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true`;
-  const imageList = await getImages(URL);
+  const imageList = await getImages(searchQuery, API_KEY);
 
   const createGallery = imageList.hits
     .map(
@@ -43,9 +42,19 @@ async function inputListener(event) {
 
 var API_KEY = '32105928-babf9526dde61d2d51f562299';
 
-async function getImages(URL) {
+async function getImages(query, API_KEY) {
   try {
-    const response = await axios.get(URL);
+    const response = await axios.get('https://pixabay.com/api/', {
+      params: {
+        key: `${API_KEY}`,
+        q: `${query}`,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: true,
+        page: 1,
+        per_page: 40,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
