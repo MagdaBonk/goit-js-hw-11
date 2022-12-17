@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: auto;
 }
 
 .search-form {
@@ -12,11 +12,14 @@ body {
   z-index: 10;
   top: 0;
   width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .search-form input {
   height: 45px;
   max-width: 350px;
+  width: 100%;
   text-indent: 15px;
   font-size: 20px;
   border-radius: 50px;
