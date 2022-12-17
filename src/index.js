@@ -8,11 +8,13 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import _debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
+let currentPage = 1;
 
 const searchForm = document.querySelector('form#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
 const gallery = document.querySelector('.gallery');
 const topButton = document.querySelector('.top');
+const loadMoreButton = document.querySelector('.load-more');
 
 searchForm.addEventListener('input', _debounce(inputListener, DEBOUNCE_DELAY));
 
@@ -29,7 +31,8 @@ const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
 
 async function inputListener(event) {
   gallery.innerHTML = '';
-  const searchQuery = event.target.value;
+  currentPage = 1;
+  const searchQuery = inputSearch.value;
   const imageList = await getImages(searchQuery, 1);
 
   if (!searchQuery) {
@@ -54,6 +57,20 @@ const goTop = event => {
 };
 
 topButton.addEventListener('click', goTop);
+
+const loadMore = async event => {
+  event.preventDefault();
+  const searchQuery = inputSearch.value;
+
+  currentPage++;
+
+  const imageList = await getImages(searchQuery, currentPage);
+
+  gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
+  gallerySimpleLightbox.refresh();
+};
+
+loadMoreButton.addEventListener('click', loadMore);
 
 window.onscroll = () => {
   backToTop();
