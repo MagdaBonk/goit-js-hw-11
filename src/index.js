@@ -1,12 +1,12 @@
 import './css/styles.css';
-import axios from 'axios';
+import { getImages } from './getImages';
+
 import Notiflix from 'notiflix';
 import simpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import _debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
-const API_KEY = '32105928-babf9526dde61d2d51f562299';
 
 const searchForm = document.querySelector('form#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
@@ -41,25 +41,6 @@ async function inputListener(event) {
     Notiflix.Notify.success(`Hooray! We found ${imageList.totalHits} images.`);
     gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
     gallerySimpleLightbox.refresh();
-  }
-}
-
-async function getImages(query, pageNumber) {
-  try {
-    const response = await axios.get('https://pixabay.com/api/', {
-      params: {
-        key: `${API_KEY}`,
-        q: `${query}`,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-        page: pageNumber,
-        per_page: 40,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
   }
 }
 
