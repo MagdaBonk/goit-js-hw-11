@@ -12,13 +12,11 @@ body {
   z-index: 10;
   top: 0;
   width: 100%;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 .search-form input {
   height: 45px;
-  width: 350px;
+  max-width: 350px;
   text-indent: 15px;
   font-size: 20px;
   border-radius: 50px;
