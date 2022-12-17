@@ -90,10 +90,6 @@ input:checked + .slider:before {
   cursor: default;
 }
 
-.gallery {
-  margin-top: 100px;
-}
-
 .info {
   position: relative;
   display: flex;
@@ -119,24 +115,30 @@ b {
   padding: 0 15px 15px 15px;
   list-style: none;
   margin-bottom: 10px;
+  margin-top: 100px;
 }
 
-.gallery__item {
+.gallery__items {
   height: 100%;
   position: relative;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 30px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
-.gallery__item figure {
+.gallery__items figure {
   width: 100%;
   padding: 0;
   margin: 0;
 }
 
-.gallery__item figcaption {
+.gallery__items figcaption {
   height: 100%;
   width: 100%;
+}
+
+.gallery__items:hover {
+  cursor: pointer;
+  transform: scale(1.03);
 }
 
 .gallery__image {
@@ -144,6 +146,8 @@ b {
   height: 230px;
   width: 100%;
   object-fit: cover;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .load-more {
