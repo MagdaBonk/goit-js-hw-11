@@ -25,6 +25,11 @@ async function inputListener(event) {
   const searchQuery = event.target.value;
   const imageList = await getImages(searchQuery, API_KEY);
 
+  if (imageList.hits.length == 0) {
+    Notiflix.Notify.info(
+      `Sorry, there are no images matching your search query. Please try again.`
+    );
+  }
   gallery.insertAdjacentHTML('afterbegin', renderGallery(imageList.hits));
 
   const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
