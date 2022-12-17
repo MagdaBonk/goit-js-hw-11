@@ -80,6 +80,15 @@ const loadMore = async event => {
   totalPages = Math.ceil(imageList.totalHits / imagesPerPage);
   gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
   gallerySimpleLightbox.refresh();
+
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+  window.scrollBy({
+    top: cardHeight * 2.5,
+    behavior: 'smooth',
+  });
+
   if (totalPages > currentPage) {
     loadMoreButtonVisible(true);
   }
