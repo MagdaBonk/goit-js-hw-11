@@ -6,6 +6,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import _debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
+const API_KEY = '32105928-babf9526dde61d2d51f562299';
 
 const searchForm = document.querySelector('form#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
@@ -66,8 +67,6 @@ async function inputListener(event) {
     captionDelay: 250,
   });
 }
-
-var API_KEY = '32105928-babf9526dde61d2d51f562299';
 
 async function getImages(query, API_KEY) {
   try {
