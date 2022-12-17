@@ -22,6 +22,7 @@ inputSearch.addEventListener('keypress', function (event) {
 });
 
 async function inputListener(event) {
+  gallery.innerHTML = '';
   const searchQuery = event.target.value;
   const imageList = await getImages(searchQuery, 1, API_KEY);
 
