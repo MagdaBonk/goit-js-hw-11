@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+}
+
+.search-form {
+  background-color: pink;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+}
+
+.search-form input {
+  height: 45px;
+  width: 350px;
+  text-indent: 15px;
+  font-size: 20px;
+  border-radius: 50px;
+  border-color: palevioletred;
+}
+
+.search-form input:focus {
+  outline: none;
+}
+
+.gallery {
+  margin-top: 100px;
+}
+
+.info {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.info-item,
+b {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 12px;
+  justify-content: center;
+  padding: 0 15px 15px 15px;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.gallery__item {
+  height: 100%;
+  position: relative;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.gallery__item figure {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.gallery__item figcaption {
+  height: 100%;
+  width: 100%;
+}
+
+.gallery__image {
+  display: block;
+  height: 230px;
+  width: 100%;
+  object-fit: cover;
+}
