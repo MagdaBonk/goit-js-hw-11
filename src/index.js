@@ -11,6 +11,7 @@ const DEBOUNCE_DELAY = 300;
 const imagesPerPage = 40;
 
 let currentPage = 1;
+let totalPages;
 
 const searchForm = document.querySelector('form#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
@@ -50,7 +51,10 @@ async function inputListener(event) {
     Notiflix.Notify.success(`Hooray! We found ${imageList.totalHits} images.`);
     gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
     gallerySimpleLightbox.refresh();
-    loadMoreButtonVisible(true);
+    totalPages = Math.ceil(imageList.totalHits / imagesPerPage);
+    if (totalPages > currentPage) {
+      loadMoreButtonVisible(true);
+    }
   }
 }
 
@@ -66,14 +70,19 @@ topButton.addEventListener('click', goTop);
 
 const loadMore = async event => {
   event.preventDefault();
+  loadMoreButtonVisible(false);
   const searchQuery = inputSearch.value;
 
   currentPage++;
 
   const imageList = await getImages(searchQuery, currentPage, imagesPerPage);
 
+  totalPages = Math.ceil(imageList.totalHits / imagesPerPage);
   gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
   gallerySimpleLightbox.refresh();
+  if (totalPages > currentPage) {
+    loadMoreButtonVisible(true);
+  }
 };
 
 loadMoreButton.addEventListener('click', loadMore);
