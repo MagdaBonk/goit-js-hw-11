@@ -109,8 +109,8 @@ b {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
+  grid-gap: 20px;
   justify-content: center;
   padding: 0 15px 15px 15px;
   list-style: none;
