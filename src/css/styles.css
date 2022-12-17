@@ -12,8 +12,8 @@ body {
   z-index: 10;
   top: 0;
   width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .search-form input {
@@ -28,8 +28,7 @@ body {
 }
 
 .button-switch {
-  margin-left: 15px;
-  padding-right: 15px;
+  margin-left: 1rem;
 }
 
 .switch {
