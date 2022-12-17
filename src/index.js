@@ -11,7 +11,7 @@ const API_KEY = '32105928-babf9526dde61d2d51f562299';
 const searchForm = document.querySelector('form#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
 const gallery = document.querySelector('.gallery');
-
+const topButton = document.querySelector('.top');
 
 searchForm.addEventListener('input', _debounce(inputListener, DEBOUNCE_DELAY));
 
@@ -95,4 +95,27 @@ function renderGallery(imagesArray) {
       </div>`
     )
     .join('');
+}
+
+const goTop = event => {
+  event.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+};
+topButton.addEventListener('click', goTop);
+
+window.onscroll = () => {
+  backToTop();
+};
+function backToTop() {
+  if (
+    document.body.scrollTop > 150 ||
+    document.documentElement.scrollTop > 150
+  ) {
+    topButton.style.display = 'block';
+  } else {
+    topButton.style.display = 'none';
+  }
 }

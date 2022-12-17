@@ -168,7 +168,7 @@ b {
 }
 
 .top {
-  /* display: none; */
+  display: none;
   background-color: pink;
   fill: white;
   width: 50px;
