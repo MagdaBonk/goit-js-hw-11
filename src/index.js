@@ -21,6 +21,11 @@ inputSearch.addEventListener('keypress', function (event) {
   }
 });
 
+const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 async function inputListener(event) {
   gallery.innerHTML = '';
   const searchQuery = event.target.value;
@@ -33,13 +38,9 @@ async function inputListener(event) {
       `Sorry, there are no images matching your search query. Please try again.`
     );
   } else {
-    gallery.insertAdjacentHTML('afterbegin', renderGallery(imageList.hits));
     Notiflix.Notify.success(`Hooray! We found ${imageList.totalHits} images.`);
-
-    const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'alt',
-      captionDelay: 250,
-    });
+    gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
+    gallerySimpleLightbox.refresh();
   }
 }
 
