@@ -29,7 +29,7 @@ const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
 async function inputListener(event) {
   gallery.innerHTML = '';
   const searchQuery = event.target.value;
-  const imageList = await getImages(searchQuery, 1, API_KEY);
+  const imageList = await getImages(searchQuery, 1);
 
   if (!searchQuery) {
     gallery.innerHTML = '';
@@ -44,7 +44,7 @@ async function inputListener(event) {
   }
 }
 
-async function getImages(query, pageNumber, API_KEY) {
+async function getImages(query, pageNumber) {
   try {
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
