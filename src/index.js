@@ -34,6 +34,7 @@ async function inputListener(event) {
     );
   } else {
     gallery.insertAdjacentHTML('afterbegin', renderGallery(imageList.hits));
+    Notiflix.Notify.success(`Hooray! We found ${imageList.totalHits} images.`);
 
     const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
       captionsData: 'alt',

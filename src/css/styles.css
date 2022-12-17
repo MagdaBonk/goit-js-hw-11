@@ -167,6 +167,10 @@ b {
   background-color: palevioletred;
 }
 
+.is-hidden {
+  display: none;
+}
+
 .top {
   display: none;
   background-color: pink;
