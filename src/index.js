@@ -22,11 +22,12 @@ inputSearch.addEventListener('keypress', function (event) {
 });
 
 async function inputListener(event) {
-  gallery.innerHTML = '';
   const searchQuery = event.target.value;
   const imageList = await getImages(searchQuery, 1, API_KEY);
 
-  if (imageList.hits.length == 0) {
+  if (!searchQuery) {
+    gallery.innerHTML = '';
+  } else if (imageList.hits.length == 0) {
     Notiflix.Notify.info(
       `Sorry, there are no images matching your search query. Please try again.`
     );
@@ -104,11 +105,13 @@ const goTop = event => {
     behavior: 'smooth',
   });
 };
+
 topButton.addEventListener('click', goTop);
 
 window.onscroll = () => {
   backToTop();
 };
+
 function backToTop() {
   if (
     document.body.scrollTop > 150 ||
