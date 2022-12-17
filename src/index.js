@@ -29,13 +29,14 @@ async function inputListener(event) {
     Notiflix.Notify.info(
       `Sorry, there are no images matching your search query. Please try again.`
     );
-  }
-  gallery.insertAdjacentHTML('afterbegin', renderGallery(imageList.hits));
+  } else {
+    gallery.insertAdjacentHTML('afterbegin', renderGallery(imageList.hits));
 
-  const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
+    const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+    });
+  }
 }
 
 async function getImages(query, API_KEY) {
