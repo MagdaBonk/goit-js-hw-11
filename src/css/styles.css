@@ -139,7 +139,8 @@ b {
 .gallery__items figcaption {
   height: 100%;
   width: 100%;
-  max-width: 320px;
+  padding-left: auto;
+  padding-right: auto;
 }
 
 .gallery__items:hover {
