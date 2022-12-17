@@ -32,19 +32,23 @@ const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
 async function inputListener(event) {
   gallery.innerHTML = '';
   currentPage = 1;
+  loadMoreButtonVisible(false);
   const searchQuery = inputSearch.value;
-  const imageList = await getImages(searchQuery, 1);
+  const imageList = await getImages(searchQuery, currentPage);
 
   if (!searchQuery) {
     gallery.innerHTML = '';
+    loadMoreButtonVisible(false);
   } else if (imageList.hits.length == 0) {
     Notiflix.Notify.info(
       `Sorry, there are no images matching your search query. Please try again.`
     );
+    loadMoreButtonVisible(false);
   } else {
     Notiflix.Notify.success(`Hooray! We found ${imageList.totalHits} images.`);
     gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
     gallerySimpleLightbox.refresh();
+    loadMoreButtonVisible(true);
   }
 }
 
@@ -84,5 +88,13 @@ function backToTop() {
     topButton.style.display = 'block';
   } else {
     topButton.style.display = 'none';
+  }
+}
+
+function loadMoreButtonVisible(visible) {
+  if (visible) {
+    loadMoreButton.classList.remove('is-hidden');
+  } else {
+    loadMoreButton.classList.add('is-hidden');
   }
 }
