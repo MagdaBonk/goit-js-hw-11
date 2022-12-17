@@ -8,6 +8,8 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import _debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
+const imagesPerPage = 40;
+
 let currentPage = 1;
 
 const searchForm = document.querySelector('form#search-form');
@@ -34,7 +36,7 @@ async function inputListener(event) {
   currentPage = 1;
   loadMoreButtonVisible(false);
   const searchQuery = inputSearch.value;
-  const imageList = await getImages(searchQuery, currentPage);
+  const imageList = await getImages(searchQuery, currentPage, imagesPerPage);
 
   if (!searchQuery) {
     gallery.innerHTML = '';
@@ -68,7 +70,7 @@ const loadMore = async event => {
 
   currentPage++;
 
-  const imageList = await getImages(searchQuery, currentPage);
+  const imageList = await getImages(searchQuery, currentPage, imagesPerPage);
 
   gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
   gallerySimpleLightbox.refresh();
