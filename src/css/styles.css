@@ -21,9 +21,6 @@ body {
   font-size: 20px;
   border-radius: 50px;
   border-color: palevioletred;
-}
-
-.search-form input:focus {
   outline: none;
 }
 
@@ -147,4 +144,42 @@ b {
   height: 230px;
   width: 100%;
   object-fit: cover;
+}
+
+.load-more {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 50px;
+  color: black;
+  background-color: #ccc;
+  position: relative;
+  margin: 0 auto 50px;
+}
+
+.load-more:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  background-color: pink;
+}
+
+.top {
+  /* display: none; */
+  background-color: pink;
+  fill: white;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  border: none;
+}
+
+.top:hover {
+  background-color: palevioletred;
+  transform: scale(1.08);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
