@@ -12,6 +12,7 @@ const searchForm = document.querySelector('form#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
 const gallery = document.querySelector('.gallery');
 
+
 searchForm.addEventListener('input', _debounce(inputListener, DEBOUNCE_DELAY));
 
 inputSearch.addEventListener('keypress', function (event) {
@@ -23,7 +24,7 @@ inputSearch.addEventListener('keypress', function (event) {
 async function inputListener(event) {
   gallery.innerHTML = '';
   const searchQuery = event.target.value;
-  const imageList = await getImages(searchQuery, API_KEY);
+  const imageList = await getImages(searchQuery, 1, API_KEY);
 
   if (imageList.hits.length == 0) {
     Notiflix.Notify.info(
@@ -39,7 +40,7 @@ async function inputListener(event) {
   }
 }
 
-async function getImages(query, API_KEY) {
+async function getImages(query, pageNumber, API_KEY) {
   try {
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
@@ -48,7 +49,7 @@ async function getImages(query, API_KEY) {
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-        page: 1,
+        page: pageNumber,
         per_page: 40,
       },
     });
