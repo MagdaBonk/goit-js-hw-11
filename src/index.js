@@ -13,7 +13,7 @@ const imagesPerPage = 40;
 let currentPage = 1;
 let totalPages;
 
-const searchForm = document.querySelector('form#search-form');
+const searchForm = document.querySelector('#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
 const gallery = document.querySelector('.gallery');
 const topButton = document.querySelector('.top');
