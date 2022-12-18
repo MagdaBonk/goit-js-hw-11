@@ -54,8 +54,13 @@ async function inputListener(event) {
     gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
     gallerySimpleLightbox.refresh();
     totalPages = Math.ceil(imageList.totalHits / imagesPerPage);
-    if (totalPages > currentPage) {
-      loadMoreButtonVisible(true);
+    if (!buttonState) {
+      if (totalPages > currentPage) {
+        loadMoreButtonVisible(true);
+      }
+      window.removeEventListener('scroll', handleInfiniteScroll);
+    } else {
+      window.addEventListener('scroll', handleInfiniteScroll);
     }
   }
 }
@@ -130,27 +135,6 @@ function loadMoreButtonVisible(visible) {
   }
 }
 
-const switchAutoScroll = () => {
-  buttonState = !buttonState;
-  loadMoreButtonVisible(!buttonState);
-  console.log(`Current button state: ${buttonState}`);
-};
-
-autoScrollButton.addEventListener('click', switchAutoScroll);
-
-const handleInfiniteScroll = () => {
-  throttle(async () => {
-    const endOfPage =
-      window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
-    if (endOfPage) {
-      await getNextPage();
-      console.log('Handling infinite scroll at the end of page');
-    }
-  }, 1000);
-};
-
-window.addEventListener('scroll', handleInfiniteScroll);
-
 let throttleTimer;
 const throttle = (callback, time) => {
   if (throttleTimer) return;
@@ -160,3 +144,35 @@ const throttle = (callback, time) => {
     throttleTimer = false;
   }, time);
 };
+
+const removeInfiniteScroll = () => {
+  window.removeEventListener('scroll', handleInfiniteScroll);
+};
+
+const handleInfiniteScroll = () => {
+  throttle(async () => {
+    const endOfPage =
+      window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+    if (endOfPage) {
+      await getNextPage();
+    }
+    if (currentPage === totalPages) {
+      removeInfiniteScroll();
+      Notiflix.Notify.info(
+        `We're sorry, but you've reached the end of search results.`
+      );
+    }
+  }, 700);
+};
+
+const switchAutoScroll = () => {
+  buttonState = !buttonState;
+  loadMoreButtonVisible(!buttonState);
+  if (buttonState && currentPage <= totalPages) {
+    window.addEventListener('scroll', handleInfiniteScroll);
+  } else {
+    removeInfiniteScroll();
+  }
+};
+
+autoScrollButton.addEventListener('click', switchAutoScroll);
