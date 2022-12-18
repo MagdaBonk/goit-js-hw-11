@@ -12,12 +12,14 @@ const imagesPerPage = 40;
 
 let currentPage = 1;
 let totalPages;
+let buttonState = false;
 
 const searchForm = document.querySelector('#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
 const gallery = document.querySelector('.gallery');
 const topButton = document.querySelector('.top');
 const loadMoreButton = document.querySelector('.load-more');
+const autoScrollButton = document.querySelector('.auto-scroll');
 
 searchForm.addEventListener('input', _debounce(inputListener, DEBOUNCE_DELAY));
 
@@ -122,3 +124,11 @@ function loadMoreButtonVisible(visible) {
     loadMoreButton.classList.add('is-hidden');
   }
 }
+
+const switchAutoScroll = () => {
+  buttonState = !buttonState;
+  loadMoreButtonVisible(!buttonState);
+  console.log(`Current button state: ${buttonState}`);
+};
+
+autoScrollButton.addEventListener('click', switchAutoScroll);
