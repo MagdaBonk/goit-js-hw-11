@@ -93,7 +93,7 @@ const loadMore = async event => {
     loadMoreButtonVisible(true);
   } else {
     Notiflix.Notify.info(
-      `Sorry, there are no images matching your search query. Please try again.`
+      `We're sorry, but you've reached the end of search results.`
     );
   }
 };
