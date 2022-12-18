@@ -70,9 +70,7 @@ const goTop = event => {
 
 topButton.addEventListener('click', goTop);
 
-const loadMore = async event => {
-  event.preventDefault();
-  loadMoreButtonVisible(false);
+async function getNextPage() {
   const searchQuery = inputSearch.value;
 
   currentPage++;
@@ -82,6 +80,13 @@ const loadMore = async event => {
   totalPages = Math.ceil(imageList.totalHits / imagesPerPage);
   gallery.insertAdjacentHTML('beforeend', renderGallery(imageList.hits));
   gallerySimpleLightbox.refresh();
+}
+
+const loadMore = async event => {
+  event.preventDefault();
+  loadMoreButtonVisible(false);
+
+  await getNextPage();
 
   const { height: cardHeight } = document
     .querySelector('.gallery')
@@ -132,3 +137,26 @@ const switchAutoScroll = () => {
 };
 
 autoScrollButton.addEventListener('click', switchAutoScroll);
+
+const handleInfiniteScroll = () => {
+  throttle(async () => {
+    const endOfPage =
+      window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+    if (endOfPage) {
+      await getNextPage();
+      console.log('Handling infinite scroll at the end of page');
+    }
+  }, 1000);
+};
+
+window.addEventListener('scroll', handleInfiniteScroll);
+
+let throttleTimer;
+const throttle = (callback, time) => {
+  if (throttleTimer) return;
+  throttleTimer = true;
+  setTimeout(() => {
+    callback();
+    throttleTimer = false;
+  }, time);
+};
