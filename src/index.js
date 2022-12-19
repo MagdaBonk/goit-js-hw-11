@@ -165,7 +165,8 @@ const handleInfiniteScroll = () => {
   }, 700);
 };
 
-const switchAutoScroll = () => {
+const switchAutoScroll = event => {
+  event.preventDefault();
   buttonState = !buttonState;
   loadMoreButtonVisible(!buttonState);
   if (buttonState && currentPage <= totalPages) {
