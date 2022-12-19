@@ -46,6 +46,10 @@ body {
   height: 0;
 }
 
+.auto-scroll {
+  cursor: pointer;
+}
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -194,6 +198,7 @@ b {
 }
 
 .top:hover {
+  cursor: pointer;
   background-color: palevioletred;
   transform: scale(1.08);
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
