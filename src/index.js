@@ -14,14 +14,13 @@ let currentPage = 1;
 let totalPages;
 let buttonState = false;
 
-const searchForm = document.querySelector('#search-form');
 const inputSearch = document.querySelector("input[name='searchQuery']");
 const gallery = document.querySelector('.gallery');
 const topButton = document.querySelector('.top');
 const loadMoreButton = document.querySelector('.load-more');
 const autoScrollButton = document.querySelector('.auto-scroll');
 
-searchForm.addEventListener('input', _debounce(inputListener, DEBOUNCE_DELAY));
+inputSearch.addEventListener('input', _debounce(inputListener, DEBOUNCE_DELAY));
 
 inputSearch.addEventListener('keypress', function (event) {
   if (event.key === 'Enter') {
@@ -34,7 +33,7 @@ const gallerySimpleLightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-async function inputListener(event) {
+async function inputListener() {
   gallery.innerHTML = '';
   currentPage = 1;
   loadMoreButtonVisible(false);
@@ -165,8 +164,7 @@ const handleInfiniteScroll = () => {
   }, 700);
 };
 
-const switchAutoScroll = event => {
-  event.preventDefault();
+const switchAutoScroll = () => {
   buttonState = !buttonState;
   loadMoreButtonVisible(!buttonState);
   if (buttonState && currentPage <= totalPages) {
